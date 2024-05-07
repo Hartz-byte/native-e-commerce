@@ -1,5 +1,5 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import CustomTextInput from "../Common/CustomTextInput";
@@ -7,6 +7,20 @@ import CommonButton from "../Common/CommonButton";
 
 const Login = () => {
   const navigation = useNavigation();
+
+  const [email, setEmail] = useState("");
+  const [badEmail, setBadEmail] = useState(false);
+  const [password, setPassword] = useState("");
+  const [badPassword, setBadPassword] = useState(false);
+
+  const validate = () => {
+    if (email == "") {
+      setBadEmail(true);
+    }
+    if (password == "") {
+      setBadPassword(true);
+    }
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -38,6 +52,10 @@ const Login = () => {
       <CustomTextInput
         placeholder={"Enter Email Id"}
         icon={require("../Images/mail.png")}
+        value={email}
+        onChangeText={(txt) => {
+          setEmail(txt);
+        }}
       />
 
       {/* password input area */}
@@ -45,6 +63,10 @@ const Login = () => {
         placeholder={"Enter Password"}
         icon={require("../Images/lock.png")}
         type={"password"}
+        value={password}
+        onChangeText={(txt) => {
+          setPassword(txt);
+        }}
       />
 
       {/* login button */}
