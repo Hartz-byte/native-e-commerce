@@ -22,6 +22,10 @@ const CustomTextInput = ({ value, placeholder, onChangeText, icon, type }) => {
       <TextInput
         placeholder={placeholder}
         secureTextEntry={type == "password" ? true : false}
+        value={value}
+        onChangeText={(txt) => {
+          onChangeText(txt);
+        }}
         style={{ marginLeft: 10 }}
       />
     </View>

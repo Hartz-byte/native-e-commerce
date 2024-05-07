@@ -16,9 +16,13 @@ const Login = () => {
   const validate = () => {
     if (email == "") {
       setBadEmail(true);
+    } else {
+      setBadEmail(false);
     }
     if (password == "") {
       setBadPassword(true);
+    } else {
+      setBadPassword(false);
     }
   };
 
@@ -57,6 +61,12 @@ const Login = () => {
           setEmail(txt);
         }}
       />
+      {/* bad email */}
+      {badEmail === true && (
+        <Text style={{ marginTop: 10, alignSelf: "center", color: "red" }}>
+          Please Enter Email Id
+        </Text>
+      )}
 
       {/* password input area */}
       <CustomTextInput
@@ -68,13 +78,21 @@ const Login = () => {
           setPassword(txt);
         }}
       />
+      {/* bad password */}
+      {badPassword === true && (
+        <Text style={{ marginTop: 10, alignSelf: "center", color: "red" }}>
+          Please Enter Password
+        </Text>
+      )}
 
       {/* login button */}
       <CommonButton
         title={"Login"}
         bgColor={"#000"}
         textColor={"#fff"}
-        onPress={() => {}}
+        onPress={() => {
+          validate();
+        }}
       />
 
       {/* register text */}
