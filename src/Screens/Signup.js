@@ -5,8 +5,6 @@ import CustomTextInput from "../Common/CustomTextInput";
 import CommonButton from "../Common/CommonButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-let isValid = true;
-
 const Signup = () => {
   const navigation = useNavigation();
 
