@@ -4,6 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 
 import CustomTextInput from "../Common/CustomTextInput";
 import CommonButton from "../Common/CommonButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+let isValid = true;
 
 const Signup = () => {
   const navigation = useNavigation();
@@ -18,39 +21,68 @@ const Signup = () => {
   const [badPassword, setBadPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [badConfirmPassword, setBadConfirmPassword] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const validate = () => {
+    setButtonDisabled = true;
+
     if (name == "") {
       setBadName(true);
+      isValid = false;
     } else {
       setBadName(false);
     }
 
     if (email === "") {
       setBadEmail(true);
+      isValid = false;
     } else {
       setBadEmail(false);
     }
 
     if (mobile === "" || mobile.length !== 10) {
       setBadMobile(true);
+      isValid = false;
     } else {
       setBadMobile(false);
     }
 
     if (password === "") {
       setBadPassword(true);
+      isValid = false;
     } else {
       setBadPassword(false);
     }
 
     if (confirmPassword !== password) {
       setBadConfirmPassword(true);
+      isValid = false;
     } else {
       setBadConfirmPassword(false);
     }
 
-    console.log("Validation successful!");
+    setTimeout(() => {
+      if (
+        badName == false &&
+        badEmail == false &&
+        badPassword == false &&
+        badConfirmPassword == false &&
+        badMobile == false
+      ) {
+        saveData();
+      } else {
+        setButtonDisabled = false;
+      }
+    }, 2000);
+  };
+
+  const saveData = async () => {
+    await AsyncStorage.setItem("NAME", name);
+    await AsyncStorage.setItem("EMAIL", email);
+    await AsyncStorage.setItem("Mobile", mobile);
+    await AsyncStorage.setItem("PASSWORD", password);
+
+    navigation.goBack();
   };
 
   return (
@@ -156,7 +188,8 @@ const Signup = () => {
         {/* signup button */}
         <CommonButton
           title={"Sign Up"}
-          bgColor={"#000"}
+          disabled={buttonDisabled}
+          bgColor={buttonDisabled ? "#8e8e8e" : "#000"}
           textColor={"#fff"}
           onPress={() => {
             validate();

@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 
-const CommonButton = ({ onPress, title, bgColor, textColor }) => {
+const CommonButton = ({ onPress, title, bgColor, textColor, disabled }) => {
   return (
     <TouchableOpacity
       style={{
@@ -17,6 +17,7 @@ const CommonButton = ({ onPress, title, bgColor, textColor }) => {
       onPress={() => {
         onPress();
       }}
+      disabled={disabled}
     >
       <Text style={{ color: textColor }}>{title}</Text>
     </TouchableOpacity>
