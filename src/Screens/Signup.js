@@ -21,7 +21,7 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // validation function
-  const validate = () => {
+  const signup = () => {
     setIsLoading(true);
 
     let isValid = true;
@@ -198,7 +198,7 @@ const Signup = () => {
           bgColor={"#000"}
           textColor={"#fff"}
           onPress={() => {
-            validate();
+            signup();
           }}
         />
 

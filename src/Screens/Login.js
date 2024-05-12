@@ -14,26 +14,34 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [badPassword, setBadPassword] = useState(false);
 
-  const validate = () => {
+  // login function
+  const login = () => {
     if (email == "") {
       setBadEmail(true);
     } else {
       setBadEmail(false);
-    }
-    if (password == "") {
-      setBadPassword(true);
-    } else {
-      setBadPassword(false);
-    }
 
-    getData();
+      if (password == "") {
+        setBadPassword(true);
+      } else {
+        setBadPassword(false);
+
+        getData();
+      }
+    }
   };
 
+  // get async data
   const getData = async () => {
     const mEmail = await AsyncStorage.getItem("EMAIL");
     const mPassword = await AsyncStorage.getItem("PASSWORD");
 
-    console.log(mEmail, mPassword);
+    // login details checking and navigation
+    if (email == mEmail && password == mPassword) {
+      navigation.navigate("Home");
+    } else {
+      alert("Wrong Credentials.");
+    }
   };
 
   return (
@@ -101,7 +109,7 @@ const Login = () => {
         bgColor={"#000"}
         textColor={"#fff"}
         onPress={() => {
-          validate();
+          login();
         }}
       />
 
