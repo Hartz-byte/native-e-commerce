@@ -1,5 +1,5 @@
 import { View, Text, Image, ScrollView } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import CustomTextInput from "../Common/CustomTextInput";
@@ -7,6 +7,15 @@ import CommonButton from "../Common/CommonButton";
 
 const Signup = () => {
   const navigation = useNavigation();
+
+  const [name, setName] = useState("");
+  const [badName, setBadName] = useState(false);
+  const [email, setEmail] = useState("");
+  const [badEmail, setBadEmail] = useState(false);
+  const [mobile, setMobile] = useState("");
+  const [badMobile, setBadMobile] = useState(false);
+  const [password, setPassword] = useState("");
+  const [badPassword, setBadPassword] = useState(false);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
