@@ -1,7 +1,6 @@
 import { View, Text, Image, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-
 import CustomTextInput from "../Common/CustomTextInput";
 import CommonButton from "../Common/CommonButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -21,68 +20,78 @@ const Signup = () => {
   const [badPassword, setBadPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [badConfirmPassword, setBadConfirmPassword] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
+  // validation function
   const validate = () => {
-    setButtonDisabled = true;
+    setIsLoading(true);
 
-    if (name == "") {
-      setBadName(true);
+    let isValid = true;
+
+    if (name.trim() === "") {
       isValid = false;
+      setBadName(true);
     } else {
       setBadName(false);
     }
 
-    if (email === "") {
-      setBadEmail(true);
+    if (email.trim() === "") {
       isValid = false;
+      setBadEmail(true);
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      isValid = false;
+      setBadEmail(true);
     } else {
       setBadEmail(false);
     }
 
-    if (mobile === "" || mobile.length !== 10) {
-      setBadMobile(true);
+    if (mobile.length !== 10) {
       isValid = false;
+      setBadMobile(true);
     } else {
       setBadMobile(false);
     }
 
-    if (password === "") {
-      setBadPassword(true);
+    if (password.trim() === "") {
       isValid = false;
+      setBadPassword(true);
     } else {
       setBadPassword(false);
     }
 
-    if (confirmPassword !== password) {
-      setBadConfirmPassword(true);
+    if (confirmPassword.trim() === "") {
       isValid = false;
+      setBadConfirmPassword(true);
+    } else if (confirmPassword !== password) {
+      isValid = false;
+      setBadConfirmPassword(true);
     } else {
       setBadConfirmPassword(false);
     }
 
-    setTimeout(() => {
-      if (
-        badName == false &&
-        badEmail == false &&
-        badPassword == false &&
-        badConfirmPassword == false &&
-        badMobile == false
-      ) {
-        saveData();
-      } else {
-        setButtonDisabled = false;
-      }
-    }, 2000);
+    if (isValid) {
+      saveData();
+    } else {
+      setIsLoading(false);
+    }
   };
 
+  // async storage function
   const saveData = async () => {
-    await AsyncStorage.setItem("NAME", name);
-    await AsyncStorage.setItem("EMAIL", email);
-    await AsyncStorage.setItem("Mobile", mobile);
-    await AsyncStorage.setItem("PASSWORD", password);
+    try {
+      await AsyncStorage.setItem("NAME", name);
+      await AsyncStorage.setItem("EMAIL", email);
+      await AsyncStorage.setItem("Mobile", mobile);
+      await AsyncStorage.setItem("PASSWORD", password);
 
-    navigation.goBack();
+      navigation.goBack();
+
+      console.log("Successfully saved");
+    } catch (error) {
+      console.error("Error saving data:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -188,8 +197,7 @@ const Signup = () => {
         {/* signup button */}
         <CommonButton
           title={"Sign Up"}
-          disabled={buttonDisabled}
-          bgColor={buttonDisabled ? "#8e8e8e" : "#000"}
+          bgColor={"#000"}
           textColor={"#fff"}
           onPress={() => {
             validate();

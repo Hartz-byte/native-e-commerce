@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import CustomTextInput from "../Common/CustomTextInput";
 import CommonButton from "../Common/CommonButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -24,6 +25,15 @@ const Login = () => {
     } else {
       setBadPassword(false);
     }
+
+    getData();
+  };
+
+  const getData = async () => {
+    const mEmail = await AsyncStorage.getItem("EMAIL");
+    const mPassword = await AsyncStorage.getItem("PASSWORD");
+
+    console.log(mEmail, mPassword);
   };
 
   return (
