@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import CustomTextInput from "../Common/CustomTextInput";
 import CommonButton from "../Common/CommonButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Loader from "../Common/Loader";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -14,19 +15,27 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [badPassword, setBadPassword] = useState(false);
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   // login function
   const login = () => {
+    setModalVisible(true);
+
     if (email == "") {
+      setModalVisible(false);
       setBadEmail(true);
     } else {
       setBadEmail(false);
 
       if (password == "") {
+        setModalVisible(false);
         setBadPassword(true);
       } else {
-        setBadPassword(false);
+        setTimeout(() => {
+          setBadPassword(false);
 
-        getData();
+          getData();
+        }, 2000);
       }
     }
   };
@@ -38,9 +47,11 @@ const Login = () => {
 
     // login details checking and navigation
     if (email == mEmail && password == mPassword) {
+      setModalVisible(false);
+
       navigation.navigate("Home");
     } else {
-      alert("Wrong Credentials.");
+      setModalVisible(false);
     }
   };
 
@@ -128,6 +139,8 @@ const Login = () => {
       >
         Create New Account?
       </Text>
+
+      <Loader modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </View>
   );
 };
