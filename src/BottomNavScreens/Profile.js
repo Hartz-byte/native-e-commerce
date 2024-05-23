@@ -16,6 +16,7 @@ const Profile = () => {
 
   return (
     <View style={{ flex: 1 }}>
+      {/* profile text and settings button */}
       <View
         style={{
           width: "100%",
@@ -58,6 +59,51 @@ const Profile = () => {
       <Text style={{ alignSelf: "center", marginTop: 20, fontSize: 18 }}>
         {name}
       </Text>
+
+      {/* My Address */}
+      <TouchableOpacity
+        style={{
+          width: "90%",
+          alignSelf: "center",
+          height: 50,
+          borderBottomWidth: 0.3,
+          marginTop: 20,
+          borderBottomColor: "8e8e8e",
+          justifyContent: "center",
+        }}
+      >
+        <Text>My Address</Text>
+      </TouchableOpacity>
+
+      {/* My Orders */}
+      <TouchableOpacity
+        style={{
+          width: "90%",
+          alignSelf: "center",
+          height: 50,
+          borderBottomWidth: 0.3,
+          marginTop: 2,
+          borderBottomColor: "8e8e8e",
+          justifyContent: "center",
+        }}
+      >
+        <Text>My Orders</Text>
+      </TouchableOpacity>
+
+      {/* Offers */}
+      <TouchableOpacity
+        style={{
+          width: "90%",
+          alignSelf: "center",
+          height: 50,
+          borderBottomWidth: 0.3,
+          marginTop: 2,
+          borderBottomColor: "8e8e8e",
+          justifyContent: "center",
+        }}
+      >
+        <Text>Offers</Text>
+      </TouchableOpacity>
     </View>
   );
 };
