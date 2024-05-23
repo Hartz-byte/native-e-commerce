@@ -7,6 +7,7 @@ import Cart from "../BottomNavScreens/Cart";
 import Wishlist from "../BottomNavScreens/Wishlist";
 import Profile from "../BottomNavScreens/Profile";
 import { useSelector } from "react-redux";
+import reducers from "../Redux/reducers/Reducer";
 
 const Home = () => {
   const [selectedTab, setSelectedTab] = useState(0);

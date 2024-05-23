@@ -1,8 +1,11 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
+  const navigation = useNavigation();
+
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -70,6 +73,9 @@ const Profile = () => {
           marginTop: 20,
           borderBottomColor: "8e8e8e",
           justifyContent: "center",
+        }}
+        onPress={() => {
+          navigation.navigate("MyAddress");
         }}
       >
         <Text>My Address</Text>
