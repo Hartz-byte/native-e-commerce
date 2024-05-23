@@ -1,11 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
-const MyProductItem = ({ item, onAddCart }) => {
-  // const handleAddCart = () => {
-  //   onAddCart(item);
-  // };
-
+const MyProductItem = ({ item, onAddToCart, onAddToWishlist }) => {
   return (
     <View
       style={{
@@ -66,7 +62,9 @@ const MyProductItem = ({ item, onAddCart }) => {
             paddingBottom: 7,
             paddingTop: 7,
           }}
-          // onPress={handleAddCart}
+          onPress={() => {
+            onAddToCart(item);
+          }}
         >
           <Text style={{ color: "#000" }}>add to cart</Text>
         </TouchableOpacity>
@@ -85,6 +83,9 @@ const MyProductItem = ({ item, onAddCart }) => {
           right: 10,
           justifyContent: "center",
           alignItems: "center",
+        }}
+        onPress={() => {
+          onAddToWishlist(item);
         }}
       >
         <Image

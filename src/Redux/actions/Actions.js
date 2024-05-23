@@ -5,7 +5,7 @@ import {
   REMOVE_FROM_WISHLIST,
 } from "../ActionTypes";
 
-export const addToCart = (data) => ({
+export const addItemToCart = (data) => ({
   type: ADD_TO_CART,
   payload: data,
 });
