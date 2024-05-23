@@ -6,9 +6,13 @@ import Search from "../BottomNavScreens/Search";
 import Cart from "../BottomNavScreens/Cart";
 import Wishlist from "../BottomNavScreens/Wishlist";
 import Profile from "../BottomNavScreens/Profile";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const [selectedTab, setSelectedTab] = useState(0);
+
+  const data = useSelector((state) => state);
+  // console.log(data);
 
   return (
     <View style={{ flex: 1 }}>
@@ -110,6 +114,30 @@ const Home = () => {
                 tintColor: "#fff",
               }}
             />
+
+            {/* count view */}
+            <View
+              style={{
+                width: 20,
+                height: 20,
+                backgroundColor: "red",
+                borderRadius: 10,
+                justifyContent: "center",
+                alignItems: "center",
+                position: "absolute",
+                top: 5,
+                right: 5,
+              }}
+            >
+              <Text
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {data.reducers.length}
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
 
@@ -133,6 +161,30 @@ const Home = () => {
               tintColor: selectedTab === 3 ? "#000" : "#8e8e8e",
             }}
           />
+
+          {/* count view */}
+          <View
+            style={{
+              width: 20,
+              height: 20,
+              backgroundColor: "red",
+              borderRadius: 10,
+              justifyContent: "center",
+              alignItems: "center",
+              position: "absolute",
+              top: 15,
+              right: 20,
+            }}
+          >
+            <Text
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {data.reducers2.length}
+            </Text>
+          </View>
         </TouchableOpacity>
 
         {/* user */}

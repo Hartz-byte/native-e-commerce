@@ -40,8 +40,8 @@ const Main = () => {
     setTrousersList(products.category[5].data);
   }, []);
 
-  const items = useSelector((state) => state);
-  console.log(items);
+  // const items = useSelector((state) => state);
+  // console.log(items);
 
   return (
     <ScrollView style={{ flex: 1 }}>
