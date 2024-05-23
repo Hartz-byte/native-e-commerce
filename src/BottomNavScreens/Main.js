@@ -10,8 +10,11 @@ import React, { useEffect, useState } from "react";
 import Header from "../Common/Header";
 import { products } from "../Products";
 import MyProductItem from "../Common/MyProductItem";
+// import { useDispatch, useSelector } from "react-redux";
 
 const Main = () => {
+  // const dispatch = useDispatch();
+
   const [categoryList, setCategoryList] = useState([]);
   const [tshirtList, setTshirtList] = useState([]);
   const [jeansList, setJeansList] = useState([]);
@@ -36,9 +39,12 @@ const Main = () => {
     setTrousersList(products.category[5].data);
   }, []);
 
+  // const items = useSelector((state) => state);
+  // console.log(items);
+
   return (
     <ScrollView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, marginBottom: 80 }}>
         {/* header */}
         <Header />
 
@@ -96,7 +102,12 @@ const Main = () => {
               horizontal
               showsHorizontalScrollIndicator={false}
               renderItem={({ item, index }) => {
-                return <MyProductItem item={item} />;
+                return (
+                  <MyProductItem
+                    item={item}
+                    // onAddCart={(x) => dispatch(addToCart(item))}
+                  />
+                );
               }}
             />
           </View>
@@ -152,7 +163,7 @@ const Main = () => {
           </View>
         </View>
 
-        {/* Jacket */}
+        {/* Jackets */}
         <View>
           <Text
             style={{
@@ -163,7 +174,7 @@ const Main = () => {
               fontWeight: "600",
             }}
           >
-            New Jacket
+            New Jackets
           </Text>
           <View style={{ marginTop: 20 }}>
             <FlatList
@@ -177,7 +188,7 @@ const Main = () => {
           </View>
         </View>
 
-        {/* Slipper */}
+        {/* Slippers */}
         <View>
           <Text
             style={{
@@ -188,7 +199,7 @@ const Main = () => {
               fontWeight: "600",
             }}
           >
-            New Slipper
+            New Slippers
           </Text>
           <View style={{ marginTop: 20 }}>
             <FlatList
