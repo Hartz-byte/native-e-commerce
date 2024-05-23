@@ -1,11 +1,10 @@
-import { View, Text, FlatList } from "react-native";
-import React, { useState } from "react";
+import { View, FlatList } from "react-native";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../Common/CartItem";
 import { addToWishlist, removeFromCart } from "../Redux/actions/Actions";
 
 const Cart = () => {
-  const [cartList, setCartList] = useState([]);
   const cartData = useSelector((state) => state.reducers);
 
   const dispatch = useDispatch();
