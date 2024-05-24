@@ -1,9 +1,13 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 const MyAddress = () => {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
+  const addressList = useSelector((state) => state.AddressReducer);
+  console.log(addressList);
 
   return (
     <View style={{ flex: 1 }}>
@@ -32,12 +36,14 @@ const MyAddress = () => {
             borderRadius: 10,
           }}
           onPress={() => {
-            navigation.navigate("AddAddress");
+            navigation.navigate("AddAddressInfo");
           }}
         >
           <Text>Add Address</Text>
         </TouchableOpacity>
       </View>
+
+      {/* <FlatList /> */}
     </View>
   );
 };

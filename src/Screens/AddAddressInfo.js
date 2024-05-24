@@ -1,15 +1,28 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import CustomTextInput from "../Common/CustomTextInput";
 import CommonButton from "../Common/CommonButton";
+import { useDispatch, useSelector } from "react-redux";
+import { addAddress } from "../Redux/actions/Actions";
 
-const AddAddress = () => {
+// let addressList = [];
+
+const AddAddressInfo = () => {
   const navigation = useNavigation();
 
   const [city, setCity] = useState("");
   const [building, setBuilding] = useState("");
   const [pin, setPin] = useState("");
+
+  const dispatch = useDispatch();
+
+  const pressHandle = () => {
+    if (city !== "" && building !== "" && pin !== "") {
+      dispatch(addAddress({ city: city, building: building, pincode: pin }));
+      navigation.goBack();
+    }
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -73,10 +86,18 @@ const AddAddress = () => {
         title={"Save Address"}
         bgColor={"#000"}
         textColor={"#fff"}
-        onPress={() => {}}
+        onPress={() => {
+          // if (city !== "" && building !== "" && pin !== "") {
+          //   dispatch(
+          //     AddAddressInfo({ city: city, building: building, pincode: pin })
+          //   );
+          //   navigation.goBack();
+          // }
+          pressHandle();
+        }}
       />
     </View>
   );
 };
 
-export default AddAddress;
+export default AddAddressInfo;
