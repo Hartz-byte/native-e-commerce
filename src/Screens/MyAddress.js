@@ -1,12 +1,14 @@
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import React from "react";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAddress } from "../Redux/actions/Actions";
 
 const MyAddress = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const addressList = useSelector((state) => state.AddressReducer);
+  const dispatch = useDispatch();
   console.log(addressList);
 
   return (
@@ -43,7 +45,41 @@ const MyAddress = () => {
         </TouchableOpacity>
       </View>
 
-      {/* <FlatList /> */}
+      <FlatList
+        data={addressList}
+        renderItem={({ item, index }) => (
+          <View
+            style={{
+              width: "100%",
+              borderWidth: 2,
+              borderColor: "#8e8e8e",
+              alignSelf: "center",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <View>
+              <Text style={{ marginLeft: 20 }}>{"City: " + item.city}</Text>
+              <Text style={{ marginLeft: 20 }}>
+                {"Building: " + item.building}
+              </Text>
+              <Text style={{ marginLeft: 20, marginBottom: 10 }}>
+                {"Pincode: " + item.pincode}
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              style={{ borderWidth: 0.2, padding: 7, marginRight: 20 }}
+              onPress={() => {
+                dispatch(deleteAddress(index));
+              }}
+            >
+              <Text>Delete Address</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      />
     </View>
   );
 };
