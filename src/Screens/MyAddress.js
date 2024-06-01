@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, Image } from "react-native";
 import React from "react";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,8 +23,27 @@ const MyAddress = () => {
           marginTop: 30,
         }}
       >
+        <TouchableOpacity
+          style={{
+            marginLeft: 20,
+            justifyContent: "center",
+            alignItems: "center",
+            borderWidth: 0.2,
+            padding: 6,
+            borderRadius: 10,
+          }}
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Image
+            source={require("../Images/back.png")}
+            style={{ width: 24, height: 24 }}
+          />
+        </TouchableOpacity>
+
         {/* My Address text */}
-        <Text style={{ fontWeight: "600", fontSize: 18, marginLeft: 15 }}>
+        <Text style={{ fontWeight: "600", fontSize: 18, marginLeft: 50 }}>
           My Address
         </Text>
 
